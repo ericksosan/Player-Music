@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+	border: none;
+	font-family: 'Poppins', sans-serif;
+}
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #252525;
+}
+
+.container {
+	width: 380px;
+	border-radius: 0.3rem;
+	background: linear-gradient(#568493, rgb(255, 255, 255));
+	box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.3);
+	overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+	height: auto;
+}
+
+.cart-music {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+}
+.info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.info img {
+	border-radius: 50%;
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+	padding: 1em;
+}
+
+.time-line {
+	width: 100%;
+	height: 3em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.times {
+	width: 80%;
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.8em;
+    user-select: none;
+}
+.conteiner-bar {
+	width: 80%;
+	height: 0.4em;
+	background-color: rgba(25, 25, 25, 0.9);
+	border-radius: 1rem;
+	overflow: hidden;
+}
+
+.progress-bar {
+	width: 50%;
+	height: inherit;
+	background-color: rgba(245, 245, 245, 0.9);
+}
+
+.controls {
+	width: 95%;
+	height: 20%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-top: 0.5em;
+}
+
+.box-playes {
+	width: 50px;
+	height: 50px;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+	cursor: pointer;
+	border-radius: 0.3rem;
+	transition: 1.5s ease;
+}
+
+.box-playes:hover {
+	transform: translateY(-5px);
+	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Title playlist*/
+.title{
+    padding: .5rem;
+}
+
+/* Playlist */
+.list-music {
+	width: 100%;
+	height: 12.5rem;
+	padding-top: 1.2rem;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
+}
+
+.list-music::-webkit-scrollbar {
+	width: .3rem;
+}
+
+.list-music::-webkit-scrollbar-thumb {
+    background: rgba(25, 25, 25, 0.9);
+    background-color: rgba(25, 25, 25, 0.9);
+	border-radius: 1rem;
+}
+
+.list-music li {
+	width: 75%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #fff;
+	padding: 1rem;
+	margin: 0.5em;
+	border-radius: 0.3rem;
+	cursor: pointer;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+	transition: 1.05s ease;
+	overflow: hidden;
+}
+
+.list-music li:hover {
+	width: 97%;
+	margin: 0.3em;
+}
+
+.title-list{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.title-list .name-art{
+	display: flex;
+	flex-direction: column;
+}
+
+li .icon-play {
+	width: 35px;
+	height: 35px;
+	background-color: rgb(32, 175, 65);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	margin: .4rem;
+	color: #fff;
+	transform: translateX(-100px);
+	transition: 1.05s ease;
+	
+}
+
+.list-music li:hover .icon-play{
+	transform: translateX(0px)
+}
+
+li .cover img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+li .cover {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+li .cover::before {
+	content: '';
+	position: relative;
+	width: 10px;
+	height: 10px;
+	background-color: #fff;
+	z-index: 100;
+	overflow: hidden;
+	border-radius: 50%;
+	left: 30;
+	right: -30px;
+}
+
+/* Animations used from js */
+
+ul li.active-cart-list {
+	width: 97%;
+	margin: 0.3em;
+	/* background-color: rgb(62, 175, 89);
+	animation: spectrum 3s linear infinite;
+	transition: 1.05s; */
+}
+
+div .active-icon-play{
+	transform: translateX(0px)
+}
+
+.spinner {
+	animation: spinner 2s linear infinite;
+}
+
+@keyframes spinner {
+	from {
+		transform: rotate(360deg);
+	}
+}
+
+/* @keyframes spectrum {
+	to{
+		box-shadow: 3px 3px 10px 0 rgb(62, 175, 89),
+					-3px -3px 10px 0 rgb(62, 175, 89);
+	}
+	from{
+		box-shadow: 0 0 0 0 #56849300;
+	}
+} */
