@@ -56,31 +56,84 @@ const backward = document.getElementById('backward');
 const play = document.getElementById('play');
 const forward = document.getElementById('forward');
 
+//function to give play, time and progress bar
+const audio = document.getElementById('audio');
+//Time line
+const startTime = document.getElementById('start-time');
+const endTime = document.getElementById('end-time');
+// progress bar
+const progressBar = document.getElementById('progress-bar');
+
+function givePlay() {
+	let currentTime = 0,
+		duration = 0,
+		min = 0;
+	audio.src = storageInfo[count].song;
+	audio.play();
+	audio.onloadeddata = () => {
+		const interval = setInterval(() => {
+			currentTime = audio.currentTime;
+			duration = audio.duration;
+
+			// progress bar
+            let adverangeBar = (currentTime / Math.round(duration) * 100);
+            console.log(adverangeBar)
+			progressBar.style.width = adverangeBar + '%';
+			//Time line
+			let seg = Math.round(currentTime) % 60;
+			if (seg === 0) min++;
+
+
+			startTime.innerHTML = `
+                <span>0${min}:${seg < 10 ? '0' + seg : seg}</span>
+            `;
+
+			endTime.innerHTML = `
+            <span>0${Math.floor(duration / 60)}:${
+				Math.round(duration % 60) < 10
+					? '0' + Math.round(duration % 60)
+					: Math.round(duration % 60)
+			}</span>
+            `;
+
+			if (currentTime === duration) {
+				giveForward();
+				min = 0;
+				clearInterval(interval);
+			}
+		}, 1000);
+	};
+	activeCurrentCardBackward();
+	activeCurrentCardForward();
+	activeCurrentCardShuffles();
+}
+
 //function to give shuffle
-const getShuffle = () => {
+function getShuffle() {
 	shuffles = Math.floor(Math.random() * storageInfo.length);
 	count = shuffles;
 	renderInfo();
-};
+	activeCurrentCardShuffles();
+	givePlay();
+}
 
 //function to give backward
-const giveBackward = () => {
+function giveBackward() {
 	count--;
 	if (count < 0) count = storageInfo.length - 1;
 	renderInfo();
-	activeCurrentCard();
-};
-
-//function to give play
-const givePlay = () => {};
+	activeCurrentCardBackward();
+	givePlay();
+}
 
 //function to give forward
-const giveForward = () => {
+function giveForward() {
 	count++;
 	if (count >= storageInfo.length) count = 0;
 	renderInfo();
-	// activeCurrentCard();
-};
+	activeCurrentCardForward();
+	givePlay();
+}
 
 //events to the playback controls or buttons
 shuffle.addEventListener('click', getShuffle);
@@ -114,20 +167,76 @@ const renderPlaylist = () => {
 
 renderPlaylist();
 
-// event to each letter of the playlist
+// event to each letter of the playlist and spinner
 const allCartPlaylist = document.querySelectorAll('li');
+const allSpinnerDisk = document.querySelectorAll('.cover img');
+const allIconPlay = document.querySelectorAll('.icon-play');
+
 allCartPlaylist.forEach((e, i) => {
 	e.addEventListener('click', () => {
 		count = i;
 		renderInfo();
+		givePlay();
+		activeCurrentCardBackward();
+		activeCurrentCardForward();
+		activeCurrentCardShuffles();
 	});
 });
 
-//active current card
-function activeCurrentCard() {
-	console.log(count);
+//active Current Card (shuffles)
+function activeCurrentCardShuffles() {
+	for (let i = 0; i <= storageInfo.length - 1; i++) {
+		allCartPlaylist[i].classList.remove('active-cart-list');
+		allSpinnerDisk[i].classList.remove('spinner');
+		allIconPlay[i].classList.remove('active-icon-play');
+
+		allCartPlaylist[count].classList.add('active-cart-list');
+		allSpinnerDisk[count].classList.add('spinner');
+		allIconPlay[count].classList.add('active-icon-play');
+	}
+}
+// activeCurrentCardShuffles();
+//active Current Card Back
+function activeCurrentCardBackward() {
+	allCartPlaylist[0].classList.add('active-cart-list');
+	allSpinnerDisk[0].classList.add('spinner');
+	allIconPlay[0].classList.add('active-icon-play');
+
+	if (count > 0) {
+		allCartPlaylist[0].classList.remove('active-cart-list');
+		allSpinnerDisk[0].classList.remove('spinner');
+		allIconPlay[0].classList.remove('active-icon-play');
+	}
+
+	allCartPlaylist[count].classList.add('active-cart-list');
+	allSpinnerDisk[count].classList.add('spinner');
+	allIconPlay[count].classList.add('active-icon-play');
+
+	if (count < storageInfo.length - 1) {
+		allCartPlaylist[count + 1].classList.remove('active-cart-list');
+		allSpinnerDisk[count + 1].classList.remove('spinner');
+		allIconPlay[count + 1].classList.remove('active-icon-play');
+	}
 }
 
-activeCurrentCard();
+// activeCurrentCardBackward();
 
-//function of spinning disk / rotating disk
+function activeCurrentCardForward() {
+	if (count >= 1) {
+		allCartPlaylist[count - 1].classList.remove('active-cart-list');
+		allSpinnerDisk[count - 1].classList.remove('spinner');
+		allIconPlay[count - 1].classList.remove('active-icon-play');
+	}
+
+	if (count >= 0) {
+		allCartPlaylist[storageInfo.length - 1].classList.remove(
+			'active-cart-list'
+		);
+		allSpinnerDisk[storageInfo.length - 1].classList.remove('spinner');
+		allIconPlay[storageInfo.length - 1].classList.remove('active-icon-play');
+	}
+
+	allCartPlaylist[count].classList.add('active-cart-list');
+	allSpinnerDisk[count].classList.add('spinner');
+	allIconPlay[count].classList.add('active-icon-play');
+}

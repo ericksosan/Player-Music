@@ -74,9 +74,10 @@ body {
 }
 
 .progress-bar {
-	width: 50%;
+	width: 0%;
 	height: inherit;
 	background-color: rgba(245, 245, 245, 0.9);
+	transition: 1s ease;
 }
 
 .controls {
