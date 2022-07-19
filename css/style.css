@@ -63,7 +63,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	font-size: 0.8em;
-    user-select: none;
+	user-select: none;
 }
 .conteiner-bar {
 	width: 80%;
@@ -109,8 +109,8 @@ body {
 }
 
 /* Title playlist*/
-.title{
-    padding: .5rem;
+.title {
+	padding: 0.5rem;
 }
 
 /* Playlist */
@@ -123,12 +123,12 @@ body {
 }
 
 .list-music::-webkit-scrollbar {
-	width: .3rem;
+	width: 0.3rem;
 }
 
 .list-music::-webkit-scrollbar-thumb {
-    background: rgba(25, 25, 25, 0.9);
-    background-color: rgba(25, 25, 25, 0.9);
+	background: rgba(25, 25, 25, 0.9);
+	background-color: rgba(25, 25, 25, 0.9);
 	border-radius: 1rem;
 }
 
@@ -152,13 +152,13 @@ body {
 	margin: 0.3em;
 }
 
-.title-list{
+.title-list {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.title-list .name-art{
+.title-list .name-art {
 	display: flex;
 	flex-direction: column;
 }
@@ -171,15 +171,14 @@ li .icon-play {
 	justify-content: center;
 	align-items: center;
 	border-radius: 50%;
-	margin: .4rem;
+	margin: 0.4rem;
 	color: #fff;
 	transform: translateX(-100px);
 	transition: 1.05s ease;
-	
 }
 
-.list-music li:hover .icon-play{
-	transform: translateX(0px)
+.list-music li:hover .icon-play {
+	transform: translateX(0px);
 }
 
 li .cover img {
@@ -214,13 +213,10 @@ li .cover::before {
 ul li.active-cart-list {
 	width: 97%;
 	margin: 0.3em;
-	/* background-color: rgb(62, 175, 89);
-	animation: spectrum 3s linear infinite;
-	transition: 1.05s; */
 }
 
-div .active-icon-play{
-	transform: translateX(0px)
+div .active-icon-play {
+	transform: translateX(0px);
 }
 
 .spinner {
@@ -232,13 +228,3 @@ div .active-icon-play{
 		transform: rotate(360deg);
 	}
 }
-
-/* @keyframes spectrum {
-	to{
-		box-shadow: 3px 3px 10px 0 rgb(62, 175, 89),
-					-3px -3px 10px 0 rgb(62, 175, 89);
-	}
-	from{
-		box-shadow: 0 0 0 0 #56849300;
-	}
-} */

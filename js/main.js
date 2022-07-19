@@ -29,6 +29,12 @@ const storageInfo = [
 		img: '/data/img/AlieGatie.jpg',
 		song: '/data/music/AliGatie-ItsYou.mp3',
 	},
+	{
+		artists: 'Bad Bunny',
+		title: 'Andrea',
+		img: '/data/img/BadBunny.webp',
+		song: '/data/music/BadBunny-Andrea.mp3',
+	},
 ];
 
 // var aux count, shuffle
@@ -64,25 +70,23 @@ const endTime = document.getElementById('end-time');
 // progress bar
 const progressBar = document.getElementById('progress-bar');
 
+let currentTime = 0,
+	duration = 0;
 function givePlay() {
-	let currentTime = 0,
-		duration = 0,
-		min = 0;
 	audio.src = storageInfo[count].song;
 	audio.play();
 	audio.onloadeddata = () => {
 		const interval = setInterval(() => {
-			currentTime = audio.currentTime;
-			duration = audio.duration;
+			currentTime = Math.round(audio.currentTime);
+			duration = Math.round(audio.duration);
 
 			// progress bar
-            let adverangeBar = (currentTime / Math.round(duration) * 100);
-            console.log(adverangeBar)
+			let adverangeBar = (currentTime / duration) * 100;
 			progressBar.style.width = adverangeBar + '%';
-			//Time line
-			let seg = Math.round(currentTime) % 60;
-			if (seg === 0) min++;
 
+			//Time line
+			let seg = currentTime % 60,
+				min = Math.floor(currentTime / 60);
 
 			startTime.innerHTML = `
                 <span>0${min}:${seg < 10 ? '0' + seg : seg}</span>
@@ -90,9 +94,7 @@ function givePlay() {
 
 			endTime.innerHTML = `
             <span>0${Math.floor(duration / 60)}:${
-				Math.round(duration % 60) < 10
-					? '0' + Math.round(duration % 60)
-					: Math.round(duration % 60)
+				duration % 60 < 10 ? '0' + (duration % 60) : duration % 60
 			}</span>
             `;
 
@@ -107,6 +109,8 @@ function givePlay() {
 	activeCurrentCardForward();
 	activeCurrentCardShuffles();
 }
+
+//function of progress bar
 
 //function to give shuffle
 function getShuffle() {
